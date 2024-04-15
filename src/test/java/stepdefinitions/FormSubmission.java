@@ -15,16 +15,19 @@ public class FormSubmission {
     CostPage costPage = new CostPage(DriverFactory.getPage());
     DeclarationPage declarationPage = new DeclarationPage(DriverFactory.getPage(),DriverFactory.getApplicationInformation());
     
-    @And("User fills in all mandatory details on the Eligibility page")
+    @And("User completes and saves all mandatory details on the Eligibility page")
     public void userFillsInAllMandatoryDetailsOnTheEligibilityPage() {
         eligibilityPage.clickYesorNoForAllQuestions("Yes");
+        eligibilityPage.clickSaveButton();
     }
 
-    @And("User fills in all mandatory details on the Contact Details page")
+    @And("User navigates,fills and saves all mandatory details on the Contact Details page")
     public void userFillsInAllMandatoryDetailsOnTheContactDetailsPage() {
+        contactDetailsPage.clickOnContactDetailsMenu();
         contactDetailsPage.inputMainContactPersonDetails();
         contactDetailsPage.enterPostalCode("100050");
         contactDetailsPage.clickSameAsMainContactCheckbox();
+        contactDetailsPage.clickSaveButton();
     }
 
     @When("The user clicks on the Proposal menu")
@@ -32,9 +35,11 @@ public class FormSubmission {
         proposalPage.clickProposalMenu();
     }
 
-    @And("User fills in all mandatory details on the Proposal page")
+    @And("User navigates,fills and saves all mandatory details on the Proposal page")
     public void userFillsInAllMandatoryDetailsOnTheProposalPage() {
+        proposalPage.clickProposalMenu();
         proposalPage.fillProposalDetails();
+        proposalPage.clickSaveButton();
     }
 
     @And("User clicks the Save button on Proposal Page")
@@ -47,9 +52,11 @@ public class FormSubmission {
         businessImpactPage.clickBusinessImpactMenu();
     }
 
-    @And("User fills in all mandatory details on the Business Impact page")
+    @And("User navigates,fills and saves all mandatory details on the Business Impact page")
     public void userFillsInAllMandatoryDetailsOnTheBusinessImpactPage() {
+        businessImpactPage.clickBusinessImpactMenu();
         businessImpactPage.fillBusinessImpactDetails();
+        businessImpactPage.clickSaveButton();
     }
 
     @And("User clicks the Save button on Business Impact page")
@@ -62,9 +69,11 @@ public class FormSubmission {
         costPage.clickCostMenu();
     }
 
-    @And("User fill in all mandatory details on the Cost page")
+    @And("User navigates,fills and saves all mandatory details on the Cost page")
     public void userFillInAllMandatoryDetailsOnTheCostPage() {
+        costPage.clickCostMenu();
         costPage.fillCostDetails();
+        costPage.clickSaveButton();
     }
 
     @And("User click the Save button on Cost page")
@@ -77,9 +86,11 @@ public class FormSubmission {
         declarationPage.clickDeclareReviewMenu();
     }
 
-    @And("User answers the declaration questions")
+    @And("User answers the declaration questions and accepts the acknowledgement")
     public void userAnswersTheDeclarationQuestions() {
+        declarationPage.clickDeclareReviewMenu();
         declarationPage.clickYesorNoForAllQuestions("No");
+        declarationPage.checkAcknowledgement();
     }
 
     @And("User checks the acknowledgement")
@@ -87,9 +98,10 @@ public class FormSubmission {
         declarationPage.checkAcknowledgement();
     }
 
-    @And("User click the Save button on declare review page")
+    @And("User reviews and submits the declaration")
     public void userClickTheSaveButtonOnDeclareReviewPage() {
         declarationPage.clickSaveButton();
+        declarationPage.clickReviewButton();
     }
 
     @And("User click the Review button on declare review page")
@@ -97,9 +109,10 @@ public class FormSubmission {
         declarationPage.clickReviewButton();
     }
 
-    @Then("read only Summary page should appear")
+    @Then("User verify the read only Summary page and accepts Consent and Acknowledgement checkbox")
     public void readOnlySummaryPageShouldAppear() {
         declarationPage.verifyReadOnlySummaryPage();
+        declarationPage.acceptAcknowledgement();
     }
 
     @Then("Verify the count of actual and expected errors as below")
@@ -121,9 +134,11 @@ public class FormSubmission {
         declarationPage.acceptAcknowledgement();
     }
 
-    @When("User submits the entire Application")
+    @When("User submits the Application and verifies the Success message box is displayed")
     public void userSubmitsTheEntireApplication() {
         declarationPage.submitApplication();
+        declarationPage.verifySuccessMessage();
+        declarationPage.verifyAgencyDetails();
     }
 
     @Then("User is greeted a Success message box is displayed")
@@ -137,9 +152,10 @@ public class FormSubmission {
     }
 
 
-    @And("Navigate to the Processing Table from Review Summary Page")
+    @And("User navigates to My Application table and verifies the Application is Shown in Processing Tab")
     public void navigateToTheProcessingTableFromReviewSummaryPage() {
         declarationPage.navigateToProcessingTable();
+        declarationPage.verifyApplicationSubmitted();
     }
 
     @And("Verify Application Submitted and verify in processing tab")

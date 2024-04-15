@@ -23,6 +23,7 @@ Feature: Eligibility Section
 
   @ac2
   Scenario: AC2 Yes and No radio button for each eligibility question
+    Given User is on Eligibility section
     Then there should be 5 Yes and 5 No radio buttons
     And there should be Yes and No radio buttons for the eligibility options:
       | react-eligibility-sg_registered_check     |
@@ -33,11 +34,13 @@ Feature: Eligibility Section
 
   @ac3
   Scenario: AC3 Clicking No on Eligibility question will display a warning message
+    Given User is on Eligibility section
     When the user clicks "No" for all eligibility questions
     Then the user should see 5 warning messages "The applicant may not meet the eligibility criteria for this grant. Visit FAQ page for more information on other government grants." for all questions
 
   @ac4
   Scenario: AC4 Clicking the link in the warning message opens a new tab with the specified URL
+    Given User is on Eligibility section
     Given the user clicks "No" for all eligibility questions
     When The user sees a warning message
     Then Clicks the link in the warning message
@@ -45,6 +48,7 @@ Feature: Eligibility Section
 
   @ac5
   Scenario: AC5 Saving Applicant's Inputs
+    Given User is on Eligibility section
     When the user clicks "Yes" for all eligibility questions
     Then User clicks Save button on Eligibility page
     And Refreshing the page should reload the saved values

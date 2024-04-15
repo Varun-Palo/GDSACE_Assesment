@@ -11,6 +11,7 @@ Feature: Application Form Submission
 
   @ac1
   Scenario: AC1 Submit Grant Application
+    Given User is on Eligibility section
     And User fills in all mandatory details on the Eligibility page
     And User clicks Save button on Eligibility page
     When The user clicks on the Contact Details menu
@@ -34,6 +35,7 @@ Feature: Application Form Submission
 
   @ac2
   Scenario: AC2 Verify errors on the incomplete application
+    Given User is on Eligibility section
     When The user clicks on the declare review menu
     And User click the Review button on declare review page
     Then Verify the count of actual and expected errors as below
@@ -48,6 +50,7 @@ Feature: Application Form Submission
     #TODO
   @ac3
   Scenario: AC3 Verify the applicants details in the review summary page
+    Given User is on Eligibility section
     Given User fills in all mandatory details on the Eligibility page
     And User clicks Save button on Eligibility page
     When The user clicks on the Contact Details menu
@@ -72,6 +75,7 @@ Feature: Application Form Submission
 
   @ac4
   Scenario: AC4 Verify Consent and Acknowledgement checkbox on Review and Summary page
+    Given User is on Eligibility section
     Given User fills in all mandatory details on the Eligibility page
     And User clicks Save button on Eligibility page
     When The user clicks on the Contact Details menu
@@ -96,6 +100,7 @@ Feature: Application Form Submission
 
   @ac5
   Scenario: AC5 Submitting the application successfully
+    Given User is on Eligibility section
     Given User fills in all mandatory details on the Eligibility page
     And User clicks Save button on Eligibility page
     When The user clicks on the Contact Details menu
@@ -123,29 +128,30 @@ Feature: Application Form Submission
 
   @ac6
   Scenario: AC6 Verify App ID
-    Given User fills in all mandatory details on the Eligibility page
-    And User clicks Save button on Eligibility page
+    Given User is on Eligibility section
+    Given User completes and saves all mandatory details on the Eligibility page
+#    And User clicks Save button on Eligibility page
     When The user clicks on the Contact Details menu
-    And User fills in all mandatory details on the Contact Details page
-    And The user clicks the Save button on Contact Details Page
-    When The user clicks on the Proposal menu
-    And User fills in all mandatory details on the Proposal page
-    And User clicks the Save button on Proposal Page
-    When The user clicks on the Business Impact menu
-    And User fills in all mandatory details on the Business Impact page
-    And User clicks the Save button on Business Impact page
-    When The user clicks on the Cost menu
-    And User fill in all mandatory details on the Cost page
-    And User click the Save button on Cost page
-    When The user clicks on the declare review menu
-    And User answers the declaration questions
-    And User checks the acknowledgement
-    And User click the Save button on declare review page
-    And User click the Review button on declare review page
-    Then read only Summary page should appear
-    And the User checks the Consent and Acknowledgement checkbox
-    And User submits the entire Application
-    Then User is greeted a Success message box is displayed
-    And the Agency details display Enterprise Singapore as the receiving Agency
-    And Navigate to the Processing Table from Review Summary Page
-    And Verify Application Submitted and verify in processing tab
+    And User navigates,fills and saves all mandatory details on the Contact Details page
+#    And The user clicks the Save button on Contact Details Page
+#    When The user clicks on the Proposal menu
+    And User navigates,fills and saves all mandatory details on the Proposal page
+#    And User clicks the Save button on Proposal Page
+#    When The user clicks on the Business Impact menu
+    And User navigates,fills and saves all mandatory details on the Business Impact page
+#    And User clicks the Save button on Business Impact page
+#    When The user clicks on the Cost menu
+    And User navigates,fills and saves all mandatory details on the Cost page
+#    And User click the Save button on Cost page
+#    When The user clicks on the declare review menu
+    And User answers the declaration questions and accepts the acknowledgement
+#    And User checks the acknowledgement
+    And User reviews and submits the declaration
+#    And User click the Review button on declare review page
+    Then User verify the read only Summary page and accepts Consent and Acknowledgement checkbox
+#    And the User checks the Consent and Acknowledgement checkbox
+    And User submits the Application and verifies the Success message box is displayed
+#    Then User is greeted a Success message box is displayed
+#    And the Agency details display Enterprise Singapore as the receiving Agency
+    And User navigates to My Application table and verifies the Application is Shown in Processing Tab
+#    And Verify Application Submitted and verify in processing tab
